@@ -1,1 +1,37 @@
-<p>auth-login works!</p>,
+
+
+<h1 class="text-center mt-48 mb-24 md:text-6xl text-5xl font-black">Welcome Back!</h1>
+
+
+<div class="max-w-xl mx-auto px-4 py-6 border border-white rounded-lg">
+  <h3 class="text-center text-3xl font-semibold text-indigo-500">Sign in</h3>
+
+  <form [formGroup]="form" class="px-2 pt-4">
+    <mat-form-field class="w-full">
+      <mat-label>Enter your email</mat-label>
+      <input
+        matInput
+        placeholder="pat@example.com"
+        [formControl]="form.controls.email"
+        (blur)="detectErrors()"
+        required
+      />
+      <mat-error>{{emailError()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+      <mat-label>Enter your password</mat-label>
+      <input matInput [type]="hide() ? 'password' : 'text'" />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="clickEvent($event)"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide()"
+      >
+        <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+  </form>
+</div>
+
