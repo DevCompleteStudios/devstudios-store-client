@@ -3,36 +3,19 @@
 <h1 class="text-center mt-48 mb-24 md:text-6xl text-5xl font-black">Welcome Back!</h1>
 
 
-<div class="max-w-xl mx-auto px-4 py-6 border border-white rounded-lg">
+<div class="max-w-xl mx-auto py-6 border border-white rounded-lg">
   <h3 class="text-center text-3xl font-semibold text-indigo-500">Sign in</h3>
 
-  <form [formGroup]="form" class="px-2 pt-4">
-    <mat-form-field class="w-full">
-      <mat-label>Enter your email</mat-label>
-      <input
-        matInput
-        placeholder="pat@example.com"
-        [formControl]="form.controls.email"
-        (blur)="detectErrors()"
-        required
-      />
-      <mat-error>{{emailError()}}</mat-error>
-    </mat-form-field>
+  <form (submit)="onSignIn()" [formGroup]="form" class="px-2 pt-4">
+    <input-email [formControl]="form.controls.email"/>
+    <input-password [formControl]="form.controls.password"/>
 
-    <mat-form-field class="w-full">
-      <mat-label>Enter your password</mat-label>
-      <input [formControl]="form.controls.password" matInput [type]="hide() ? 'password' : 'text'" />
+    <div class="flex justify-center">
       <button
-        mat-icon-button
-        matSuffix
-        (click)="clickEvent($event)"
-        [attr.aria-label]="'Hide password'"
-        [attr.aria-pressed]="hide()"
-      >
-        <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
-      </button>
-      <mat-error>{{passwordError()}}</mat-error>
-    </mat-form-field>
+        [disabled]="form.invalid"
+        class="bg-indigo-600 transition-colors hover:bg-indigo-700 px-4 md:w-1/2 w-full py-1 rounded-lg disabled:opacity-40"
+        >Sign in</button>
+    </div>
   </form>
 </div>
 
