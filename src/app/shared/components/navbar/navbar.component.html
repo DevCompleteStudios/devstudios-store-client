@@ -1,17 +1,47 @@
+<div class="px-6 md:px-12 py-3 bg-gradient-to-r from-indigo-900 to-indigo-800 text-white shadow-lg">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0">
+    <!-- Logo/Brand -->
+    <a routerLink="home" class="text-2xl font-bold tracking-tight hover:text-indigo-300 transition-colors">
+      DevComplete <span class="text-indigo-400">Studios</span>
+    </a>
 
+    <!-- Main Navigation -->
+    <nav class="flex gap-8">
+      @for (link of links; track $index) {
+        <a
+          class="hover:text-indigo-300 transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-indigo-400 after:transition-all"
+          routerLinkActive="text-indigo-300 after:w-full"
+          [routerLink]="link.link">
+          {{link.name}}
+        </a>
+      }
+    </nav>
 
-<div class="px-12 py-4 bg-indigo-900 flex justify-between text-lg">
-  <a routerLink="home" class="text-2xl underline font-bold">DevComplete Studios</a>
-
-  <nav class="flex gap-6">
-    @for (link of links; track $index) {
-      <a class="hover:underline" routerLinkActive="text-blue-400" [routerLink]="link.link">{{link.name}}</a>
-    }
-  </nav>
-
-  <nav class="flex gap-4">
-    <a routerLink="auth/login">Login</a>
-    <a routerLink="auth/register">Sign in</a>
-  </nav>
+    <!-- Auth Navigation -->
+    <nav class="flex gap-6 items-center">
+      @if (isLogged) {
+        <a
+          routerLink="profile"
+          class="hover:text-indigo-300 px-4 py-2 bg-indigo-900 rounded-lg transition-colors">
+          Profile
+        </a>
+        <button
+          (click)="onLogout()"
+          class="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg transition-colors">
+          Logout
+        </button>
+      } @else {
+        <a
+          routerLink="auth/login"
+          class="hover:text-indigo-300 transition-colors">
+          Login
+        </a>
+        <a
+          routerLink="auth/register"
+          class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-colors">
+          Sign in
+        </a>
+      }
+    </nav>
+  </div>
 </div>
-

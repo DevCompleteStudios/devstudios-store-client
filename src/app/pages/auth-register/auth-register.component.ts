@@ -34,7 +34,7 @@ export class AuthRegisterComponent {
       .subscribe({
         next: () => {
           this.err.set(undefined);
-          // this.router.navigate(['/home']);
+          this.router.navigate(['/home']);
         },
         error: (error) => {
           if( error.error && error.error.err ){

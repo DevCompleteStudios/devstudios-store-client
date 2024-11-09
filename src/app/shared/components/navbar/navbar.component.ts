@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { ILink } from './interfaces/ILink.interface';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -26,6 +27,25 @@ export class NavbarComponent {
       link: 'terms',
       name: 'Terms'
     },
+    {
+      link: 'subscriptions',
+      name: 'Subscriptions'
+    },
   ];
+
+
+  constructor(
+    private authService: AuthService,
+    private router:Router,
+  ){}
+
+
+  protected get isLogged():boolean{
+    return this.authService.isLogged;
+  }
+
+  protected onLogout(){
+    this.authService.logout();
+  }
 
 }
