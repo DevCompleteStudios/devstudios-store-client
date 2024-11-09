@@ -1,0 +1,13 @@
+
+
+
+@if (getErrors.length > 0) {
+  <ul class="space-y-1 w-full">
+    @for (err of getErrors; track $index) {
+      <li class="bg-red-600 w-full py-0.5 text-center rounded-sm">
+        {{err}}
+      </li>
+    }
+  </ul>
+}
+

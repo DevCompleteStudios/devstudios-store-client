@@ -5,6 +5,7 @@ import { ValidatePassword } from '../../validators/ValidatePassword';
 import { InputEmailComponent } from '../input-email/input-email.component';
 import { InputPasswordComponent } from '../input-password/input-password.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ShowErrorsComponent } from "../show-errors/show-errors.component";
 
 
 @Component({
@@ -15,8 +16,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     FormsModule,
     InputPasswordComponent,
     InputEmailComponent,
-    MatProgressSpinnerModule
-  ],
+    MatProgressSpinnerModule,
+    ShowErrorsComponent
+],
   templateUrl: './auth.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -39,6 +41,8 @@ export class AuthComponent {
   @Input({required: true})
   public isLoading!:boolean;
 
+  @Input()
+  public err?: string | string[];
 
   @Output()
   public onSend = new EventEmitter<IForm>();
@@ -46,7 +50,7 @@ export class AuthComponent {
 
 
   onSucces(){
-    if( this.form.invalid ) return;
+    if( this.form.invalid || this.isLoading ) return;
     const email: string = this.form.controls.email.value!;
     const password: string = this.form.controls.password.value!;
 
