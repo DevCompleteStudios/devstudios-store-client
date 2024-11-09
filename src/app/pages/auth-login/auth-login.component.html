@@ -21,7 +21,7 @@
 
     <mat-form-field class="w-full">
       <mat-label>Enter your password</mat-label>
-      <input matInput [type]="hide() ? 'password' : 'text'" />
+      <input [formControl]="form.controls.password" matInput [type]="hide() ? 'password' : 'text'" />
       <button
         mat-icon-button
         matSuffix
@@ -31,6 +31,7 @@
       >
         <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
+      <mat-error>{{passwordError()}}</mat-error>
     </mat-form-field>
   </form>
 </div>

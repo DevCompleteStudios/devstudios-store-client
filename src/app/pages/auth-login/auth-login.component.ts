@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { merge } from 'rxjs';
+import { ValidatePassword } from '../../shared/validators/ValidatePassword';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class AuthLoginComponent {
 
   protected form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required, ValidatePassword()]),
   });
 
   protected emailError = signal('');
@@ -46,6 +47,15 @@ export class AuthLoginComponent {
       this.emailError.set('Email is not valid');
     } else {
       this.emailError.set('');
+    }
+
+    console.log(passField.errors);
+
+    if( passField.hasError('password') ){
+      const err: string = passField.getError('password');
+      this.passwordError.set(err);
+    } else {
+      this.passwordError.set('');
     }
   }
 
