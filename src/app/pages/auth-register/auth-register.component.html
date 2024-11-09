@@ -1,1 +1,10 @@
-<p>auth-register works!</p>
+
+<app-auth
+  title="Sign in"
+  subTitle="Create Account"
+  (onSend)="onRegister($event)"
+  btnMessage="Sign up"
+  [isLoading]="isLoading()"
+></app-auth>
+
+

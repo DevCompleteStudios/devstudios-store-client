@@ -1,33 +1,23 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ValidatePassword } from '../../shared/validators/ValidatePassword';
-import { InputEmailComponent } from "../../shared/components/input-email/input-email.component";
-import { InputPasswordComponent } from "../../shared/components/input-password/input-password.component";
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { AuthComponent } from "../../shared/components/auth/auth.component";
+import { IForm } from '../../shared/components/auth/interfaces/IForm.interface';
+
 
 
 @Component({
   selector: 'app-auth-login',
   standalone: true,
-  imports: [InputEmailComponent, ReactiveFormsModule, InputPasswordComponent],
+  imports: [AuthComponent],
   templateUrl: './auth-login.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthLoginComponent {
 
-  protected form = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl('', [Validators.required, ValidatePassword()]),
-  });
+  protected isLoading = signal(false);
 
 
-  onSignIn(){
-    if( this.form.invalid ) return;
-    const email:string = this.form.controls.email.value!;
-    const password:string = this.form.controls.password.value!;
-
-    console.log(email);
-    console.log(password);
+  onLogin( form: IForm ){
+    console.log('Loggeando...');
   }
-
 
 }

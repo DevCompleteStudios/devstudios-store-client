@@ -1,21 +1,10 @@
 
 
-<h1 class="text-center mt-48 mb-24 md:text-6xl text-5xl font-black">Welcome Back!</h1>
-
-
-<div class="max-w-xl mx-auto py-6 border border-white rounded-lg">
-  <h3 class="text-center text-3xl font-semibold text-indigo-500">Sign in</h3>
-
-  <form (submit)="onSignIn()" [formGroup]="form" class="px-2 pt-4">
-    <input-email [formControl]="form.controls.email"/>
-    <input-password [formControl]="form.controls.password"/>
-
-    <div class="flex justify-center">
-      <button
-        [disabled]="form.invalid"
-        class="bg-indigo-600 transition-colors hover:bg-indigo-700 px-4 md:w-1/2 w-full py-1 rounded-lg disabled:opacity-40"
-        >Sign in</button>
-    </div>
-  </form>
-</div>
+<app-auth
+  btnMessage="Sign in"
+  title="Welcome Back!"
+  subTitle="Sign in"
+  (onSend)="onLogin($event)"
+  [isLoading]="isLoading()"
+></app-auth>
 

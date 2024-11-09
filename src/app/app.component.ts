@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, signal } from '@angular/core';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { NavbarComponent } from "./shared/components/navbar/navbar.component";
 
 @Component({
@@ -9,5 +9,19 @@ import { NavbarComponent } from "./shared/components/navbar/navbar.component";
   templateUrl: './app.component.html',
 })
 export class AppComponent {
-  title = 'devstudios-store-client';
+
+  showNavbar = signal<boolean>(true);
+
+
+  constructor(
+    private router:Router
+  ){
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.showNavbar.set(!event.urlAfterRedirects.includes('auth'));
+      }
+    });
+  }
+
+
 }
