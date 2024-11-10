@@ -1,64 +1,57 @@
-
-
 <main class="container mx-auto py-8 px-4 text-black">
   @if (!err()) {
-    <ul class="grid gap-6">
+    <ul class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
       @for (script of scriptsStore(); track script.id) {
-        <li class="group relative overflow-hidden rounded-lg bg-white shadow-sm transition-all duration-300 hover:shadow-lg border border-gray-100">
-          <!-- Grid Container -->
-          <div class="grid md:grid-cols-3 gap-4">
-            <!-- Image Section -->
-            <div class="relative overflow-hidden">
-              <div class="aspect-video md:aspect-square overflow-hidden">
-                <img
-                  [src]="script.image"
-                  [alt]="script.name"
-                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                >
-              </div>
+        <li class="group relative overflow-hidden rounded-lg bg-white shadow-sm transition-all duration-300 hover:shadow-lg border border-gray-100 flex flex-col">
+          <!-- Image Section -->
+          <div class="relative overflow-hidden">
+            <div class="aspect-w-16 aspect-h-9 overflow-hidden">
+              <img
+                [src]="script.image"
+                [alt]="script.name"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              >
+            </div>
 
-              @if (script.isActive) {
-                <span class="absolute top-3 left-3 px-2.5 py-1 text-sm font-medium text-white bg-green-500 rounded-full">
-                  Active
-                </span>
-              }
+            @if (script.isActive) {
+              <span class="absolute top-3 left-3 px-2.5 py-1 text-xs md:text-sm font-medium text-white bg-green-500 rounded-full">
+                Active
+              </span>
+            }
 
-              <span [class]="'absolute top-3 right-3 px-2.5 py-1 text-sm font-medium text-white rounded-full ' + getPaymentBadgeInfo(script.methodPayment).color">
-                {{ getPaymentBadgeInfo(script.methodPayment).label }}
+            <span [class]="'absolute top-3 right-3 px-2.5 py-1 text-xs md:text-sm font-medium text-white rounded-full ' + getPaymentBadgeInfo(script.methodPayment).color">
+              {{ getPaymentBadgeInfo(script.methodPayment).label }}
+            </span>
+          </div>
+
+          <!-- Content Section -->
+          <div class="p-4 flex flex-col flex-grow">
+            <!-- Header -->
+            <div class="mb-4">
+              <h2 class="text-lg md:text-xl font-semibold tracking-tight">
+                {{ script.name }}
+              </h2>
+              <span class="text-xl md:text-2xl font-bold text-blue-600">
+                ${{ script.price.toFixed(2) }}
               </span>
             </div>
 
-            <!-- Content Section -->
-            <div class="p-4 md:p-6 md:col-span-2">
-              <div class="flex flex-col h-full">
-                <!-- Header -->
-                <div>
-                  <div class="flex items-center justify-between mb-2">
-                    <h2 class="text-xl md:text-2xl font-semibold tracking-tight">
-                      {{ script.name }}
-                    </h2>
-                    <span class="text-xl md:text-2xl font-bold">
-                      ${{ script.price.toFixed(2) }}
-                    </span>
-                  </div>
-                  <p class="text-gray-600 text-base md:text-lg mb-4 leading-relaxed">
-                    {{ script.description }}
-                  </p>
-                </div>
+            <!-- Description -->
+            <p class="text-gray-600 text-sm md:text-base mb-4 leading-relaxed flex-grow">
+              {{ script.description }}
+            </p>
 
-                <!-- Actions -->
-                <div class="mt-auto flex items-center gap-3">
-                  <a routerLink="/details/{{script.id}}" class="flex-1 md:flex-none px-4 py-2 text-base border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
-                    View Details
-                  </a>
-                  <button class="flex-1 md:flex-none px-4 py-2 text-base bg-black text-white rounded-lg hover:bg-gray-800 transition-colors duration-200 flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
-                    </svg>
-                    Buy Now
-                  </button>
-                </div>
-              </div>
+            <!-- Actions -->
+            <div class="mt-auto flex items-center gap-3">
+              <a routerLink="/details/{{script.id}}" class="flex-1 px-4 py-2 text-base border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200 text-center">
+                View Details
+              </a>
+              <button class="flex-1 px-4 py-2 text-base bg-black text-white rounded-lg hover:bg-gray-800 transition-colors duration-200 flex items-center justify-center gap-2">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                </svg>
+                Buy Now
+              </button>
             </div>
           </div>
         </li>
@@ -68,11 +61,9 @@
     <app-show-errors [err]="err()"></app-show-errors>
   }
 
-
   @if (isLoading()) {
     <div class="flex justify-center">
       <mat-spinner></mat-spinner>
     </div>
   }
 </main>
-
