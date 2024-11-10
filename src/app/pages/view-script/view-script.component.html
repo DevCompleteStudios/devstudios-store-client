@@ -1,1 +1,12 @@
-<p>view-script works!</p>,
+
+
+@if (isLoading() || !script) {
+  <div class="flex mt-32 justify-center">
+    <mat-spinner></mat-spinner>
+  </div>
+}
+
+<div class="mt-20">
+  <app-show-errors [err]="err()"/>
+</div>
+

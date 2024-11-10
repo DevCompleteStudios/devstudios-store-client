@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { finalize } from 'rxjs';
-import { IScriptPreviewDto, methodPayment } from '../../../services/interfaces/api/store/IScript.interface';
+import { IScriptPreviewDto, methodPayment } from '../../../services/interfaces/api/store/IScriptPreviewDto.interface';
 import { StoreService } from '../../../services/store.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ShowErrorsComponent } from "../show-errors/show-errors.component";
