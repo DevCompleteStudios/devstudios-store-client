@@ -24,7 +24,7 @@ export const routes: Routes = [
     component: SubscriptionsComponent
   },
   {
-    path: 'view-scrip',
+    path: 'details/:id',
     component: ViewScriptComponent,
   },
   {

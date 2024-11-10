@@ -10,4 +10,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   templateUrl: './view-script.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ViewScriptComponent { }
+export class ViewScriptComponent {
+
+  constructor(){}
+
+}
+

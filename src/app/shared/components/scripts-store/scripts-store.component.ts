@@ -4,12 +4,13 @@ import { IScriptDto, methodPayment } from '../../../services/interfaces/api/stor
 import { StoreService } from '../../../services/store.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ShowErrorsComponent } from "../show-errors/show-errors.component";
+import { RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-scripts-store',
   standalone: true,
-  imports: [MatProgressSpinnerModule, ShowErrorsComponent],
+  imports: [MatProgressSpinnerModule, ShowErrorsComponent, RouterLink],
   templateUrl: './scripts-store.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
