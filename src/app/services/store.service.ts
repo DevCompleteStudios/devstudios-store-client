@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IScriptDto } from './interfaces/api/store/IScript.interface';
+import { IScriptPreviewDto } from './interfaces/api/store/IScript.interface';
 import { IResponse } from './interfaces/api/IResponse';
 
 @Injectable({
@@ -18,8 +18,8 @@ export class StoreService {
   ){}
 
 
-  public getAllScripts(page:number, elements: number): Observable<IResponse<IScriptDto[]>>{
-    return this.http.get<IResponse<IScriptDto[]>>(`${this.route}/find-all?page=${page}&elements=${elements}`);
+  public getAllScripts(page:number, elements: number): Observable<IResponse<IScriptPreviewDto[]>>{
+    return this.http.get<IResponse<IScriptPreviewDto[]>>(`${this.route}/find-all?page=${page}&elements=${elements}`);
   }
 
 }

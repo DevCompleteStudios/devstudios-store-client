@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { finalize } from 'rxjs';
-import { IScriptDto, methodPayment } from '../../../services/interfaces/api/store/IScript.interface';
+import { IScriptPreviewDto, methodPayment } from '../../../services/interfaces/api/store/IScript.interface';
 import { StoreService } from '../../../services/store.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ShowErrorsComponent } from "../show-errors/show-errors.component";
@@ -21,7 +21,7 @@ export class ScriptsStoreComponent {
   protected isLoading = signal(false);
   protected err = signal<string | string[] | undefined>(undefined);
 
-  protected scriptsStore = signal<IScriptDto[]>([]);
+  protected scriptsStore = signal<IScriptPreviewDto[]>([]);
 
 
   constructor(

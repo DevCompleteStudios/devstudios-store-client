@@ -1,7 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { StoreService } from '../../services/store.service';
-import { IScriptDto, methodPayment } from '../../services/interfaces/api/store/IScript.interface';
-import { finalize } from 'rxjs';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ScriptsStoreComponent } from "../../shared/components/scripts-store/scripts-store.component";
 
 
