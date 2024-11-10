@@ -1,15 +1,15 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { finalize } from 'rxjs';
 import { IScriptDto, methodPayment } from '../../../services/interfaces/api/store/IScript.interface';
 import { StoreService } from '../../../services/store.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ShowErrorsComponent } from "../show-errors/show-errors.component";
+
 
 @Component({
   selector: 'app-scripts-store',
   standalone: true,
-  imports: [
-    CommonModule,
-  ],
+  imports: [MatProgressSpinnerModule, ShowErrorsComponent],
   templateUrl: './scripts-store.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
