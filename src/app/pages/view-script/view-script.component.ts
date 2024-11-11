@@ -1,15 +1,18 @@
 import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
 import { StoreService } from '../../services/store.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IScriptDto } from '../../services/interfaces/api/store/IScriptDto.interface';
-import { finalize, tap } from 'rxjs';
+import { finalize } from 'rxjs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ShowErrorsComponent } from "../../shared/components/show-errors/show-errors.component";
+import { MatIconModule } from '@angular/material/icon';
+import { AuthService } from '../../services/auth.service';
+import { BuyScriptBtnComponent } from "../../shared/components/buy-script-btn/buy-script-btn.component";
 
 @Component({
   selector: 'app-view-script',
   standalone: true,
-  imports: [MatProgressSpinnerModule, ShowErrorsComponent],
+  imports: [MatProgressSpinnerModule, ShowErrorsComponent, MatIconModule, BuyScriptBtnComponent],
   templateUrl: './view-script.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -24,6 +27,8 @@ export class ViewScriptComponent implements OnInit {
   constructor(
     private storeService: StoreService,
     private route:ActivatedRoute,
+    private authService: AuthService,
+    private router: Router,
   ){}
 
   ngOnInit(): void {
@@ -38,6 +43,7 @@ export class ViewScriptComponent implements OnInit {
   searchScript(){
     const script:IScriptDto | undefined = this.storeService.getScriptsCache.find( s => +s.id! === +this.id()! );
     if( script ){
+      this.isLoading.set(false);
       this.script.set(script);
       return;
     }
@@ -58,6 +64,13 @@ export class ViewScriptComponent implements OnInit {
         next: (data) => this.script.set(data.data),
       })
   }
+
+  formatDate( date:Date ):string{
+    return new Date(date).toLocaleDateString('en-US')
+  }
+
+
+
 
 }
 

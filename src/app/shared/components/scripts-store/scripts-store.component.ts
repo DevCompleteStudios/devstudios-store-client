@@ -5,12 +5,13 @@ import { StoreService } from '../../../services/store.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ShowErrorsComponent } from "../show-errors/show-errors.component";
 import { RouterLink } from '@angular/router';
+import { BuyScriptBtnComponent } from "../buy-script-btn/buy-script-btn.component";
 
 
 @Component({
   selector: 'app-scripts-store',
   standalone: true,
-  imports: [MatProgressSpinnerModule, ShowErrorsComponent, RouterLink],
+  imports: [MatProgressSpinnerModule, ShowErrorsComponent, RouterLink, BuyScriptBtnComponent],
   templateUrl: './scripts-store.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
