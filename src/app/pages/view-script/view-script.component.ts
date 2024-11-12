@@ -1,18 +1,19 @@
 import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
 import { StoreService } from '../../services/store.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { IScriptDto } from '../../services/interfaces/api/store/IScriptDto.interface';
 import { finalize } from 'rxjs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ShowErrorsComponent } from "../../shared/components/show-errors/show-errors.component";
 import { MatIconModule } from '@angular/material/icon';
-import { AuthService } from '../../services/auth.service';
 import { BuyScriptBtnComponent } from "../../shared/components/buy-script-btn/buy-script-btn.component";
+import { CurrencyPipe } from '@angular/common';
+import { AddComentScriptComponent } from "../../shared/components/add-coment-script/add-coment-script.component";
 
 @Component({
   selector: 'app-view-script',
   standalone: true,
-  imports: [MatProgressSpinnerModule, ShowErrorsComponent, MatIconModule, BuyScriptBtnComponent],
+  imports: [MatProgressSpinnerModule, ShowErrorsComponent, MatIconModule, BuyScriptBtnComponent, CurrencyPipe, MatIconModule, AddComentScriptComponent],
   templateUrl: './view-script.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -27,8 +28,6 @@ export class ViewScriptComponent implements OnInit {
   constructor(
     private storeService: StoreService,
     private route:ActivatedRoute,
-    private authService: AuthService,
-    private router: Router,
   ){}
 
   ngOnInit(): void {
@@ -69,8 +68,22 @@ export class ViewScriptComponent implements OnInit {
     return new Date(date).toLocaleDateString('en-US')
   }
 
+  get getStarsMedium(): number{
+    if( !this.script() || this.script()!.ratings.length < 1 ) return 0;
 
+    let medium = 0;
+    this.script()!.ratings.forEach( s => medium += s.stars );
+    return medium / this.script()!.ratings.length;
+  }
 
+  get isAvailablePayment():Boolean {
+    return this.script() !== undefined
+      && this.script()!.isActive
+      &&
+      (this.script()!.methodPayment === 'SUBSCRIPTION_AND_ONE_PAYMENT'
+          ||
+        this.script()!.methodPayment === 'ONE_PAYMENT');
+  }
 
 }
 

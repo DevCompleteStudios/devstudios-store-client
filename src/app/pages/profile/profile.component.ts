@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
+import { RouterLink } from '@angular/router';
 
 
 
@@ -21,6 +22,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatButtonModule,
     MatTabsModule,
     MatTableModule,
+    RouterLink
   ],
   templateUrl: './profile.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
