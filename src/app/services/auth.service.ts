@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { IAuth } from './interfaces/auth/IAuth';
 import { IResponse } from './interfaces/api/IResponse';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
+import { IUserDto } from './interfaces/api/user/IUserDto';
 
 
 
@@ -52,7 +53,16 @@ export class AuthService {
     return this.signIn(data, '/register');
   }
 
-  public verifyToken(){}
+  public verifyToken():Observable<IResponse<IUserDto>>{
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    });
+
+    return this.http.get<IResponse<IUserDto>>(`${this.url}/verify-token`, {headers})
+      .pipe(
+        tap( (data) => this.token = data.token)
+      );
+  }
 
   public get getToken():string | undefined {
     return this.token;

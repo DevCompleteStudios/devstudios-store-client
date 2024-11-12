@@ -1,4 +1,5 @@
 import { IRoleDto } from "../roles/IRoleDto";
+import { IScriptPurchase } from "../store/IScriptPurchase.interface";
 
 
 export interface IUserDto {
@@ -9,7 +10,7 @@ export interface IUserDto {
   createdAt: Date;
   updatedAt: Date;
   isActive: boolean;
-  scriptsPurchases: any[];
+  scriptsPurchases: IScriptPurchase[];
   subscriptionsPurchases: any[];
 
 }

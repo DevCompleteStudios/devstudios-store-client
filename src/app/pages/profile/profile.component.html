@@ -1,2 +1,102 @@
 
+@if (isLoading()) {
+  <div class="flex justify-center mt-20">
+    <mat-spinner></mat-spinner>
+  </div>
+}
 
+@if (user()) {
+  <div class="container mx-auto p-6 text-white">
+    <div class="flex flex-col md:flex-row items-center justify-between">
+      <div>
+        <h1 class="text-3xl font-bold">Welcome, {{ user()?.email }}</h1>
+        <p class="text-gray-400">Member {{ user()?.createdAt | date:'mediumDate' }}</p>
+      </div>
+      <div class="mt-4 md:mt-0">
+        <button mat-icon-button color="primary" aria-label="Editar Perfil">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <mat-tab-group class="mt-8">
+      <mat-tab label="Compras de Scripts">
+        <div class="overflow-x-auto mt-4">
+          <table
+            mat-table
+            [dataSource]="user()!.scriptsPurchases"
+            class="min-w-full text-white"
+          >
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>Script</th>
+              <td mat-cell *matCellDef="let element">{{ element.script.name }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="date">
+              <th mat-header-cell *matHeaderCellDef>Date</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.script.createdAt }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="price">
+              <th mat-header-cell *matHeaderCellDef>Price</th>
+              <td mat-cell *matCellDef="let element">${{ element.script.price }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="key">
+              <th mat-header-cell *matHeaderCellDef>Key</th>
+              <td mat-cell *matCellDef="let element; let i = index">
+                <div class="flex items-center">
+                  <span>
+                    {{
+                      revealKey.get(i)
+                        ? element.key.value
+                        : '••••••••••••••••••••••••'
+                    }}
+                  </span>
+                  <button
+                    mat-icon-button
+                    (click)="toggleKey(i)"
+                    [attr.aria-label]="revealKey.get(i) ? 'Show key' : 'Hidden key'"
+                  >
+                    <mat-icon>
+                      {{ revealKey.get(i) ? 'visibility_off' : 'visibility' }}
+                    </mat-icon>
+                  </button>
+                </div>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef>Status</th>
+              <td mat-cell *matCellDef="let element">
+                <span
+                  [ngClass]="{
+                    'text-green-500': element.script.isActive,
+                    'text-red-500': !element.script.isActive
+                  }"
+                >
+                  {{ element.script.isActive ? 'Activo' : 'Inactivo' }}
+                </span>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr
+              mat-row
+              *matRowDef="let row; columns: displayedColumns"
+              class="hover:bg-gray-800"
+            ></tr>
+          </table>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Suscripciones">
+        <div class="mt-4">
+          <p class="text-gray-400">Nothing...</p>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+}
