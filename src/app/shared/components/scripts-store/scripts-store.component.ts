@@ -6,12 +6,13 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ShowErrorsComponent } from "../show-errors/show-errors.component";
 import { RouterLink } from '@angular/router';
 import { BuyScriptBtnComponent } from "../buy-script-btn/buy-script-btn.component";
+import { SlicePipe } from '@angular/common';
 
 
 @Component({
   selector: 'app-scripts-store',
   standalone: true,
-  imports: [MatProgressSpinnerModule, ShowErrorsComponent, RouterLink, BuyScriptBtnComponent],
+  imports: [MatProgressSpinnerModule, ShowErrorsComponent, RouterLink, BuyScriptBtnComponent, SlicePipe],
   templateUrl: './scripts-store.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -62,6 +63,12 @@ export class ScriptsStoreComponent {
       day: '2-digit',
       year: 'numeric'
     });
+  }
+
+  isAvailableInPaymeny( script: IScriptPreviewDto ){
+    return script.isActive
+      &&
+    script.methodPayment !== 'SUBSCRIPTION';
   }
 
 }

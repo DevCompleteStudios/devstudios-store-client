@@ -13,7 +13,7 @@ import { AddComentScriptComponent } from "../../shared/components/add-coment-scr
 @Component({
   selector: 'app-view-script',
   standalone: true,
-  imports: [MatProgressSpinnerModule, ShowErrorsComponent, MatIconModule, BuyScriptBtnComponent, CurrencyPipe, MatIconModule, AddComentScriptComponent],
+  imports: [MatProgressSpinnerModule, ShowErrorsComponent, MatIconModule, BuyScriptBtnComponent, CurrencyPipe, MatIconModule, AddComentScriptComponent, MatIconModule],
   templateUrl: './view-script.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

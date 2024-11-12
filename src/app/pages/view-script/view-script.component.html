@@ -19,14 +19,27 @@
         </div>
 
         <div class="mb-8">
+          <div class="flex max-md:flex-col gap-1 justify-between md:mb-4 mb-1 md:items-center">
+            <div class="flex gap-1 items-center text-gray-600 max-md:text-xs">
+              <mat-icon fontIcon="calendar_month"></mat-icon>
+              <p>created at: {{formatDate(script()!.createdAt)}}</p>
+            </div>
+            <div class="flex gap-1 items-center text-gray-600 max-md:text-xs">
+              <mat-icon fontIcon="update"></mat-icon>
+              <p>last update: {{formatDate(script()!.createdAt)}}</p>
+            </div>
+          </div>
+
           <h2 class="md:text-3xl text-lg md:font-bold font-medium mb-2"> {{script()!.name}} </h2>
           <h4 class="font-semibold md:text-xl text-lg mb-4 text-blue-900">
             {{script()!.description}}
           </h4>
 
-          <h1 class="font-bold text-blue-700 md:text-7xl text-5xl">
-            {{script()!.price | currency}}
-          </h1>
+          @if (isAvailablePayment) {
+            <h1 class="font-bold text-blue-700 md:text-7xl text-5xl">
+              {{script()!.price | currency}}
+            </h1>
+          }
         </div>
 
         @if (isAvailablePayment) {
