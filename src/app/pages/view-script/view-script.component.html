@@ -30,14 +30,16 @@
         </div>
 
         @if (isAvailablePayment) {
-          <div class="flex justify-between max-md:flex-col mb-8 md:text-xl text-lg font-medium text-yellow-500">
-            <div class="flex gap-1 items-center">
-              <p>
+          <div class="flex gap-2 flex-col mb-8 md:text-xl text-lg font-medium text-yellow-500">
+            <div class="flex gap-1 items-center text-blue-500 drop-shadow-sm">
+              <p class="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">
                 {{getStarsMedium}}
               </p>
-              <mat-icon fontIcon="star"></mat-icon>
+              <mat-icon fontIcon="star" class="text-yellow-400 drop-shadow-md"></mat-icon>
             </div>
-            <p class="text-blue-600">{{script()!.purchases.length}} sold</p>
+            <p class="text-green-600 font-semibold tracking-wide drop-shadow-sm">
+              {{script()!.purchases.length}} sold
+            </p>
           </div>
         }@else {
           <p class="text-center md:text-lg mb-8">This script is available by subscription and individual sale is not available.</p>
