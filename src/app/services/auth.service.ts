@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IAuth } from './interfaces/auth/IAuth';
 import { IResponse } from './interfaces/api/IResponse';
-import { IUserDto } from './interfaces/api/user/IUserDto';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
@@ -32,28 +31,28 @@ export class AuthService {
 
 
   private signIn( data: IAuth, url: string ){
-    return this.http.post<IResponse<IUserDto>>( `${this.url}${url}`, data)
+    return this.http.post<IResponse<string>>( `${this.url}${url}`, data)
       .pipe(
         tap( data => {
           this.token = data.token;
           this.cookieService.set(this.tokenName, data.token!, {path: '/'});
         }),
         tap( data => {
-          this.email = data.data.email;
-          this.cookieService.set(this.emailname, data.data.email, {path: '/'});
+          this.email = data.data;
+          this.cookieService.set(this.emailname, data.data, {path: '/'});
         })
       );
   }
 
-  public login( data: IAuth ):Observable<IResponse<IUserDto>>{
+  public login( data: IAuth ):Observable<IResponse<string>>{
     return this.signIn(data, '/login');
   }
 
-  public register( data: IAuth ){
+  public register( data: IAuth ): Observable<IResponse<string>>{
     return this.signIn(data, '/register');
   }
 
-  public renewToken(){}
+  public verifyToken(){}
 
   public get getToken():string | undefined {
     return this.token;

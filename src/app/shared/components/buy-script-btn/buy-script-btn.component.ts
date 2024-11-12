@@ -3,6 +3,7 @@ import { StoreService } from '../../../services/store.service';
 import { AuthService } from '../../../services/auth.service';
 import { finalize } from 'rxjs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,7 +15,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 })
 export class BuyScriptBtnComponent {
 
-  protected showModalLogin = signal(false);
   protected isLoadingBuying = signal(false);
   protected err = signal<string | undefined>(undefined);
 
@@ -25,6 +25,7 @@ export class BuyScriptBtnComponent {
   constructor(
     private storeService: StoreService,
     private authService: AuthService,
+    private router: Router,
   ){}
 
 
@@ -51,8 +52,7 @@ export class BuyScriptBtnComponent {
 
   onClick(){
     if( !this.authService.isLogged ){
-      this.showModalLogin.set(true);
-      console.log('Inicia sesion para continuar');
+      this.router.navigate(['/auth/login']);
     }
     else {
       this.buyScript();
