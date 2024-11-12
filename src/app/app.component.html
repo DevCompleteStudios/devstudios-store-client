@@ -1,8 +1,19 @@
 
-@if (showNavbar()) {
-  <app-navbar/>
+
+@if (isLoading()) {
+  <div class="flex justify-center mt-20">
+    <mat-spinner></mat-spinner>
+  </div>
 }
-<router-outlet/>
+
+
+@if (!isLoading()) {
+  @if (showNavbar()) {
+    <app-navbar/>
+  }
+
+  <router-outlet/>
+}
 
 
 

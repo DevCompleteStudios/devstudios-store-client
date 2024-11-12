@@ -10,6 +10,8 @@ import { SupportComponent } from './pages/support/support.component';
 import { TermsComponent } from './pages/terms/terms.component';
 import { FaqComponent } from './pages/faq/faq.component';
 import { PaymentSuccesComponent } from './pages/payment-succes/payment-succes.component';
+import { isLoggedGuard } from './guards/auth/is-logged.guard';
+import { isNotLoggedGuard } from './guards/auth/is-not-logged.guard';
 
 export const routes: Routes = [
   {
@@ -19,6 +21,7 @@ export const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
+    canActivate: [isLoggedGuard]
   },
   {
     path: 'subscriptions',
@@ -51,10 +54,12 @@ export const routes: Routes = [
   {
     path: 'auth/login',
     component: AuthLoginComponent,
+    canActivate: [isNotLoggedGuard]
   },
   {
     path: 'auth/register',
     component: AuthRegisterComponent,
+    canActivate: [isNotLoggedGuard]
   },
   {
     path: '**',
