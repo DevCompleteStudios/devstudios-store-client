@@ -9,6 +9,7 @@ import { AuthRegisterComponent } from './pages/auth-register/auth-register.compo
 import { SupportComponent } from './pages/support/support.component';
 import { TermsComponent } from './pages/terms/terms.component';
 import { FaqComponent } from './pages/faq/faq.component';
+import { PaymentSuccesComponent } from './pages/payment-succes/payment-succes.component';
 
 export const routes: Routes = [
   {
@@ -42,6 +43,10 @@ export const routes: Routes = [
   {
     path: 'faq',
     component: FaqComponent,
+  },
+  {
+    path: 'payment-succes',
+    component: PaymentSuccesComponent,
   },
   {
     path: 'auth/login',
