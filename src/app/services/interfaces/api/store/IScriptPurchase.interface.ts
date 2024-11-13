@@ -6,5 +6,7 @@ export interface IScriptPurchase {
   uuid:string;
   key: IKey;
   script: IScriptPreviewDto;
+  amount: number;
+  isActive: boolean;
 }
 

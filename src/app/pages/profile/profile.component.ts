@@ -3,12 +3,12 @@ import { IUserDto } from '../../services/interfaces/api/user/IUserDto';
 import { AuthService } from '../../services/auth.service';
 import { finalize } from 'rxjs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { CommonModule } from '@angular/common';
+import { CommonModule, SlicePipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatTableModule } from '@angular/material/table';
+import { ViewDetailsPurchasesComponent } from "../../shared/components/view-details-purchases/view-details-purchases.component";
+import { IPurchase } from '../../shared/components/view-details-purchases/interfaces/IPurchase';
 import { MatTabsModule } from '@angular/material/tabs';
-import { RouterLink } from '@angular/router';
 
 
 
@@ -20,10 +20,10 @@ import { RouterLink } from '@angular/router';
     MatProgressSpinnerModule,
     MatIconModule,
     MatButtonModule,
-    MatTabsModule,
-    MatTableModule,
-    RouterLink
-  ],
+    SlicePipe,
+    ViewDetailsPurchasesComponent,
+    MatTabsModule
+],
   templateUrl: './profile.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -50,6 +50,36 @@ export class ProfileComponent implements OnInit {
 
   protected toggleKey(index: number): void {
     this.revealKey.set(index, !this.revealKey.get(index));
+  }
+
+  protected get getScriptPurchases(): IPurchase[] {
+    if( !this.user() ) return [];
+    return this.user()!.scriptsPurchases.map( s => {
+      return {
+        amount: s.amount,
+        isActive: s.isActive,
+        key: s.key.value,
+        name: s.script.name,
+        link: `details/${s.script.id}`,
+        orderId: s.uuid,
+      }
+    });
+  }
+
+  protected get getSubscriptionPurchases():IPurchase[]{
+    if( !this.user() ) return [];
+
+    return this.user()!.subscriptionsPurchases.map( s => {
+      return {
+        amount: s.amount,
+        isActive: s.isActive,
+        key: s.key.value,
+        link: '/subscriptions',
+        name: s.subscription.name,
+        orderId: s.uuid,
+        dateExpired: s.dateExpired,
+      }
+    })
   }
 
 }
