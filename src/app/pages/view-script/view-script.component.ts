@@ -73,7 +73,9 @@ export class ViewScriptComponent implements OnInit {
 
     let medium = 0;
     this.script()!.ratings.forEach( s => medium += s.stars );
-    return medium / this.script()!.ratings.length;
+    let result = medium / this.script()!.ratings.length;
+
+    return parseFloat(result.toFixed(1));
   }
 
   get isAvailablePayment():Boolean {
