@@ -4,6 +4,8 @@ import { AuthService } from '../../../services/auth.service';
 import { finalize } from 'rxjs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Router } from '@angular/router';
+import { method } from './interfaces/ITypePayment';
+import { SubscriptionsService } from '../../../services/subscriptions.service';
 
 
 @Component({
@@ -21,13 +23,30 @@ export class BuyScriptBtnComponent {
   @Input({required: true})
   public id!:number;
 
+  @Input({required: true})
+  public method!: method;
+
 
   constructor(
     private storeService: StoreService,
     private authService: AuthService,
     private router: Router,
+    private subscriptionsService:SubscriptionsService,
   ){}
 
+
+  onBuy(){
+    if( !this.authService.isLogged ){
+      this.router.navigate(['/auth/login']);
+      return;
+    }
+
+    if( this.method === 'SCRIPT' ){
+      this.buyScript();
+    } else {
+      this.buySubscription();
+    }
+  }
 
   buyScript(){
     this.isLoadingBuying.set(true);
@@ -40,7 +59,6 @@ export class BuyScriptBtnComponent {
         next: (data) => window.location.href = data.data,
         error: (error) => {
           if( error.error && error.error.status && error.error.status === 401 ){
-            // error de token caducado - mostrar modal de token caducado.
             console.log('token caducado');
           } else {
             this.err.set('Unexpected error, please try again later');
@@ -49,14 +67,20 @@ export class BuyScriptBtnComponent {
       })
   }
 
+  buySubscription(){
+    this.isLoadingBuying.set(true);
 
-  onClick(){
-    if( !this.authService.isLogged ){
-      this.router.navigate(['/auth/login']);
-    }
-    else {
-      this.buyScript();
-    }
+    this.subscriptionsService.buyById(this.id, this.authService.getToken!)
+      .subscribe({
+        next: (data) => window.location.href = data.data,
+        error: (error) => {
+          if( error.error && error.error.status && error.error.status === 401 ){
+            console.log('token caducado');
+          } else {
+            this.err.set('Unexpected error, please try again later');
+          }
+        }
+      })
   }
 
 

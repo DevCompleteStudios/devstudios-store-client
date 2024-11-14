@@ -60,7 +60,7 @@ export class ProfileComponent implements OnInit {
         isActive: s.isActive,
         key: s.key.value,
         name: s.script.name,
-        link: `details/${s.script.id}`,
+        link: `/details/${s.script.id}`,
         orderId: s.uuid,
       }
     });

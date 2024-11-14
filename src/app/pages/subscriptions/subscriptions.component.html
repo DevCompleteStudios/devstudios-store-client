@@ -1,1 +1,74 @@
-<p>subscriptions works!</p>,
+
+
+<h1 class="text-center mt-20 md:text-5xl text-3xl font-bold">Subscriptions</h1>
+
+
+
+@if (isLoading()) {
+  <div class="flex justify-center mt-10">
+    <mat-spinner></mat-spinner>
+  </div>
+}@else {
+  <div class="mt-10">
+    <app-show-errors [err]="err()"></app-show-errors>
+  </div>
+
+  @if (subscriptions() && subscriptions()!.length > 0) {
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+      @for (subscription of subscriptions(); track subscription.id) {
+        <div class="group relative flex flex-col h-full rounded-xl bg-black text-gray-200 border border-gray-500 shadow transition-all duration-300 hover:shadow-xl hover:scale-[1.02] hover:border-blue-500">
+          <!-- Encabezado con precio -->
+          <div class="p-6 pb-4">
+            <h3 class="text-2xl font-bold tracking-tight mb-2">
+              {{subscription.name}}
+            </h3>
+            <div class="flex items-baseline gap-1 mb-4">
+              <span class="text-4xl font-bold text-blue-600">
+                {{ subscription.price | currency }}
+              </span>
+              <span class="text-sm text-gray-500">
+                / {{subscription.daysDuration}} days
+              </span>
+            </div>
+            <p class="text-sm text-gray-500">
+              {{subscription.description}}
+            </p>
+          </div>
+
+          <!-- Lista de beneficios -->
+          <div class="p-6 pt-0 flex-grow">
+            <ul class="space-y-3">
+              @for (benefit of subscription.content; track benefit) {
+                <li class="flex items-start gap-3">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 text-blue-500 mt-0.5 flex-shrink-0"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  <span class="text-sm">{{benefit}}</span>
+                </li>
+              }
+            </ul>
+          </div>
+
+          <!-- Botón de acción -->
+          <div class="my-4 rounded-lg mx-2 border border-blue-600">
+            <buy-script-btn [id]="subscription.id" method="SUBSCRIPTION"></buy-script-btn>
+          </div>
+        </div>
+      }
+    </div>
+  }@else {
+    <div class="mt-10">
+      <app-show-errors err="There are currently no subscriptions, please purchase individual services!"></app-show-errors>
+    </div>
+  }
+}
+
