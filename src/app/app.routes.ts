@@ -12,6 +12,7 @@ import { FaqComponent } from './pages/faq/faq.component';
 import { PaymentSuccesComponent } from './pages/payment-succes/payment-succes.component';
 import { isLoggedGuard } from './guards/auth/is-logged.guard';
 import { isNotLoggedGuard } from './guards/auth/is-not-logged.guard';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 
 export const routes: Routes = [
   {
@@ -40,10 +41,6 @@ export const routes: Routes = [
     component: SupportComponent,
   },
   {
-    path: 'terms',
-    component: TermsComponent,
-  },
-  {
     path: 'faq',
     component: FaqComponent,
   },
@@ -59,6 +56,11 @@ export const routes: Routes = [
   {
     path: 'auth/register',
     component: AuthRegisterComponent,
+    canActivate: [isNotLoggedGuard]
+  },
+  {
+    path: 'auth/forgot-password',
+    component: ForgotPasswordComponent,
     canActivate: [isNotLoggedGuard]
   },
   {

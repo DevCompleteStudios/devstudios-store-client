@@ -85,4 +85,13 @@ export class AuthService {
     this.cookieService.delete(this.emailname, '/');
   }
 
+
+  public onResetPassword(body: {email: string}):Observable<IResponse<string>>{
+    return this.http.post<IResponse<string>>(this.url + "/forgot-password", body);
+  }
+
+  public onSendCode( body: {code:string, password: string} ): Observable<IResponse<any>>{
+    return this.http.put<IResponse<any>>(this.url + "/reset-password", body);
+  }
+
 }

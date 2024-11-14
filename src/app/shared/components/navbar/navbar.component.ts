@@ -16,10 +16,6 @@ export class NavbarComponent {
 
   protected links:ILink[] = [
     {
-      link: 'support',
-      name: 'Support'
-    },
-    {
       link: 'faq',
       name: 'F.A.Q.'
     },
