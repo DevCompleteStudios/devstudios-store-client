@@ -21,6 +21,19 @@
       }
     </div>
 
+    <div class="text-sm">
+      @if (isLogin) {
+        <p>
+          new user? 
+          <a class="underline" routerLink="/auth/register">Create account</a>
+        </p>
+      }@else {
+        <p>
+          already have account? 
+          <a class="underline" routerLink="/auth/login">Login</a>
+        </p>
+      }
+    </div>
     <app-show-errors [err]="err"/>
   </form>
 

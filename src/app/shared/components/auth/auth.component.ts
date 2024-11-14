@@ -6,6 +6,7 @@ import { InputEmailComponent } from '../input-email/input-email.component';
 import { InputPasswordComponent } from '../input-password/input-password.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ShowErrorsComponent } from "../show-errors/show-errors.component";
+import { RouterLink } from '@angular/router';
 
 
 @Component({
@@ -17,7 +18,8 @@ import { ShowErrorsComponent } from "../show-errors/show-errors.component";
     InputPasswordComponent,
     InputEmailComponent,
     MatProgressSpinnerModule,
-    ShowErrorsComponent
+    ShowErrorsComponent,
+    RouterLink
 ],
   templateUrl: './auth.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -47,6 +49,8 @@ export class AuthComponent {
   @Output()
   public onSend = new EventEmitter<IForm>();
 
+  @Input()
+  public isLogin = false;
 
 
   onSucces(){
