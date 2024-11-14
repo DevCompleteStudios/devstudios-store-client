@@ -9,11 +9,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { BuyScriptBtnComponent } from "../../shared/components/buy-script-btn/buy-script-btn.component";
 import { CurrencyPipe } from '@angular/common';
 import { AddComentScriptComponent } from "../../shared/components/add-coment-script/add-coment-script.component";
+import { ShowRatingComponent } from "../../shared/components/show-rating/show-rating.component";
 
 @Component({
   selector: 'app-view-script',
   standalone: true,
-  imports: [MatProgressSpinnerModule, ShowErrorsComponent, MatIconModule, BuyScriptBtnComponent, CurrencyPipe, MatIconModule, AddComentScriptComponent, MatIconModule],
+  imports: [MatProgressSpinnerModule, ShowErrorsComponent, MatIconModule, BuyScriptBtnComponent, CurrencyPipe, MatIconModule, AddComentScriptComponent, MatIconModule, ShowRatingComponent],
   templateUrl: './view-script.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -53,7 +54,6 @@ export class ViewScriptComponent implements OnInit {
       )
       .subscribe({
         error: (error) => {
-          console.log(error);
           if( error.error && error.error.err ){
             this.err.set(`Script with id: ${this.id()} not found`);
             return;

@@ -1,0 +1,36 @@
+@if (isLoading()) {
+  <div class="text-white flex justify-center">
+    <mat-progress-spinner></mat-progress-spinner>
+  </div>
+}@else if (rating() && rating()!.length <= 0) {
+  <div class="mt-10">
+    <app-show-errors err="Be the first to add a comment!"/>
+  </div>
+}@else {
+  <ul class="md:px-12 px-6 py-4 space-y-3 my-4">
+    @for (coment of rating(); track $index) {
+      <li class="max-w-xl mx-auto rounded-lg bg-gray-800 text-white px-4 py-3 shadow-md">
+        <div class="flex justify-between items-center">
+          <div class="flex gap-1 items-center">
+            @for (s of getStarsArray; track $index) {
+              <mat-icon [ngClass]="coment.stars > $index ? 'text-blue-500' :'text-gray-500'" fontIcon="star">
+              </mat-icon>
+            }
+          </div>
+          <p class="text-gray-400 text-sm"> {{coment.createdAt | date}} </p>
+        </div>
+        <hr class="my-2 border-gray-600">
+
+        <div class="flex gap-2 items-center text-sm text-blue-400">
+          <div class="flex gap-1 items-center">
+            <mat-icon fontIcon="check_circle" class="text-blue-400"></mat-icon>
+            <p>Verified purchase</p>
+          </div>
+        </div>
+        <p class="text-sm font-medium my-2">
+          {{coment.content}}
+        </p>
+      </li>
+    }
+  </ul>
+}
