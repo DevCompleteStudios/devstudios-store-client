@@ -21,7 +21,7 @@
       }
     </div>
 
-    <div class="text-sm">
+    <div class="text-sm flex max-md:flex-col gap-2 mt-6 justify-between items-center">
       @if (isLogin) {
         <p>
           new user? 
@@ -36,7 +36,7 @@
 
       <p>
         Forgot password? 
-        <a routerLink="/auth/forgot-password">reset</a>
+        <a class="underline" routerLink="/auth/forgot-password">reset</a>
       </p>
     </div>
     <app-show-errors [err]="err"/>

@@ -24,7 +24,7 @@ export class ResetPasswordComponent {
 
   protected codeError = signal<string>("");
   protected form = new FormGroup({
-    password: new FormControl(""),
+    password: new FormControl("", [Validators.required, ValidatePassword()]),
     code: new FormControl("", [Validators.required, Validators.maxLength(6), Validators.minLength(6)])
   })
   protected err = signal<string>("");
@@ -69,8 +69,8 @@ export class ResetPasswordComponent {
       .subscribe({
         next: (data) => {console.log(data)},
         error: (error) => {
-          if( error.err && error.err.error ){
-            this.err.set(error.err.error);
+          if( error.error && error.error.err ){
+            this.err.set(error.error.err);
           } else {
             this.err.set("Unexpected error, please try again later");
           }
