@@ -37,8 +37,8 @@ export const routes: Routes = [
     component: DashboardAdminComponent,
   },
   {
-    path: 'support',
-    component: SupportComponent,
+    path: 'terms',
+    component: TermsComponent,
   },
   {
     path: 'faq',
