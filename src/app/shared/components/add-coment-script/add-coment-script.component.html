@@ -28,7 +28,9 @@
     }
   </div>
 
-  <button [disabled]="form.invalid" type="submit" class="w-full" mat-stroked-button>Add coment</button>
+  <div class="flex justify-center">
+    <button mat-flat-button [disabled]="form.invalid">Add coment</button>
+  </div>
   <app-show-errors [err]="err()"></app-show-errors>
 </form>
 

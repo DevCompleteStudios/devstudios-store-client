@@ -23,7 +23,7 @@ export class AddComentScriptComponent {
   scriptId!: number;
 
   protected form = new FormGroup({
-    content: new FormControl("", [Validators.required, Validators.minLength(10), Validators.maxLength(250)]),
+    content: new FormControl("", [Validators.required, Validators.minLength(4), Validators.maxLength(250)]),
     orderId: new FormControl("", [Validators.required, Validators.minLength(5)])
   })
 

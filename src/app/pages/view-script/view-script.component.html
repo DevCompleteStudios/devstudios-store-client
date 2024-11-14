@@ -64,6 +64,14 @@
 
 
     @if (isAvailablePayment) {
+      <section>
+        <h2 class="text-center mt-20 md:text-3xl text-2xl">Add comment</h2>
+    
+        <div class="max-w-2xl mx-auto">
+          <add-coment-script [scriptId]="script()!.id"></add-coment-script>
+        </div>
+      </section>
+
       <app-show-rating [scriptId]="script()!.id"></app-show-rating>
     }
   </main>
