@@ -71,6 +71,9 @@ export class BuyScriptBtnComponent {
     this.isLoadingBuying.set(true);
 
     this.subscriptionsService.buyById(this.id, this.authService.getToken!)
+      .pipe(
+        finalize( () => this.isLoadingBuying.set(false) )
+      )
       .subscribe({
         next: (data) => window.location.href = data.data,
         error: (error) => {
