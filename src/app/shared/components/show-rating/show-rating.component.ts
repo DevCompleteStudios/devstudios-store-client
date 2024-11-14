@@ -6,13 +6,14 @@ import { ShowErrorsComponent } from "../show-errors/show-errors.component";
 import { finalize } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule, DatePipe } from '@angular/common';
+import { AddComentScriptComponent } from "../add-coment-script/add-coment-script.component";
 
 
 
 @Component({
   selector: 'app-show-rating',
   standalone: true,
-  imports: [MatProgressSpinnerModule, ShowErrorsComponent, MatIconModule, DatePipe, CommonModule],
+  imports: [MatProgressSpinnerModule, ShowErrorsComponent, MatIconModule, DatePipe, CommonModule, AddComentScriptComponent],
   templateUrl: './show-rating.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -21,7 +22,7 @@ export class ShowRatingComponent implements OnInit {
   @Input({required: true})
   public scriptId!: number;
 
-  protected rating = signal<IRating[] | undefined>(undefined);
+  protected rating = signal<IRating[]>([]);
   protected currentPage = signal(0);
   protected elementsByPage = signal(10);
   protected maxPage = signal(0);

@@ -34,7 +34,7 @@ export class AddComentScriptComponent {
   protected currentStars = signal(5);
   protected isLoading = signal(false);
 
-  
+
   constructor(
     private ratingService:RatingService,
   ){
@@ -49,13 +49,15 @@ export class AddComentScriptComponent {
     this.isLoading.set(true);
     const orderId: string = this.form.controls.orderId.value!;
     const content: string = this.form.controls.content.value!;
-  
+
     this.ratingService.addComent(this.scriptId, {content, orderId, stars: this.currentStars()})
       .pipe(
         finalize( () => this.isLoading.set(false) )
       )
       .subscribe({
-        next: () => {},
+        next: () => {
+          this.form.reset();
+        },
         error: (error) => {
           if( error.error && error.error.err ){
             this.err.set(error.error.err);
@@ -95,5 +97,5 @@ export class AddComentScriptComponent {
   changeStars( value: number ){
     this.currentStars.set(value + 1);
   }
-  
+
 }

@@ -18,7 +18,7 @@
     @for (star of getMaxStars; track $index) {
       @if (currentStars() > $index) {
         <button type="button" (click)="changeStars($index)">
-          <mat-icon class="text-yellow-400" fontIcon="star"></mat-icon> 
+          <mat-icon class="text-yellow-400" fontIcon="star"></mat-icon>
         </button>
       }@else {
         <button type="button" (click)="changeStars($index)">

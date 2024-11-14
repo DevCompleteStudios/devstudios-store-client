@@ -7,6 +7,14 @@
     <app-show-errors err="Be the first to add a comment!"/>
   </div>
 }@else {
+  <section>
+    <h2 class="text-center mt-20 md:text-3xl text-2xl">Add comment</h2>
+
+    <div class="max-w-2xl mx-auto">
+      <add-coment-script [scriptId]="scriptId"></add-coment-script>
+    </div>
+  </section>
+
   <ul class="md:px-12 px-6 py-4 space-y-3 my-4">
     @for (coment of rating(); track $index) {
       <li class="max-w-xl mx-auto rounded-lg bg-gray-800 text-white px-4 py-3 shadow-md">
