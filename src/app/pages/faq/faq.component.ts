@@ -1,12 +1,12 @@
-import { CommonModule } from '@angular/common';
+import {MatExpansionModule} from '@angular/material/expansion';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+
 
 @Component({
   selector: 'app-faq',
   standalone: true,
-  imports: [
-    CommonModule,
-  ],
+  imports: [MatExpansionModule, RouterLink],
   templateUrl: './faq.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
