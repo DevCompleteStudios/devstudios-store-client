@@ -6,14 +6,13 @@ import { ShowErrorsComponent } from "../show-errors/show-errors.component";
 import { finalize } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule, DatePipe } from '@angular/common';
-import { AddComentScriptComponent } from "../add-coment-script/add-coment-script.component";
 
 
 
 @Component({
   selector: 'app-show-rating',
   standalone: true,
-  imports: [MatProgressSpinnerModule, ShowErrorsComponent, MatIconModule, DatePipe, CommonModule, AddComentScriptComponent],
+  imports: [MatProgressSpinnerModule, ShowErrorsComponent, MatIconModule, DatePipe, CommonModule],
   templateUrl: './show-rating.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

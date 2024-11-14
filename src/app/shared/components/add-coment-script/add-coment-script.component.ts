@@ -57,6 +57,7 @@ export class AddComentScriptComponent {
       .subscribe({
         next: () => {
           this.form.reset();
+          window.location.reload();
         },
         error: (error) => {
           if( error.error && error.error.err ){
