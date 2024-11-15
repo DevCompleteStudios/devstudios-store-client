@@ -3,13 +3,14 @@ import { Injectable, signal } from '@angular/core';
 import { ISubscriptionDto } from './interfaces/api/store/ISubscriptionDto.interface';
 import { Observable, tap } from 'rxjs';
 import { IResponse } from './interfaces/api/IResponse';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubscriptionsService {
 
-  private url: string = 'https://devstudios.up.railway.app/api/subscriptions';
+  private url: string = environment.apiUrl + '/subscriptions';
   private subscriptions = signal<ISubscriptionDto[] | undefined>(undefined);
 
   constructor(

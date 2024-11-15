@@ -4,13 +4,14 @@ import { Observable, tap } from 'rxjs';
 import { IScriptPreviewDto } from './interfaces/api/store/IScriptPreviewDto.interface';
 import { IResponse } from './interfaces/api/IResponse';
 import { IScriptDto } from './interfaces/api/store/IScriptDto.interface';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StoreService {
 
-  private url:string = 'https://devstudios.up.railway.app/api/scripts';
+  private url:string = environment.apiUrl + '/scripts';
   private scripts = signal<IScriptDto[]>([]);
 
 

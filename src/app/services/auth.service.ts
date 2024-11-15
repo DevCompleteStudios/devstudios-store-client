@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { IUserDto } from './interfaces/api/user/IUserDto';
+import { environment } from '../../environments/environment';
 
 
 
@@ -15,7 +16,7 @@ export class AuthService {
 
   private token?: string;
   private email?: string;
-  private url = 'https://devstudios.up.railway.app/api/auth';
+  private url = environment.apiUrl + '/auth';
 
   private tokenName = 'token_dvcs';
   private emailname = 'email_dvcs';

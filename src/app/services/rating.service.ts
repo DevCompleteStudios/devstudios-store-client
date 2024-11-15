@@ -4,13 +4,14 @@ import { IResponse } from './interfaces/api/IResponse';
 import { Observable, tap } from 'rxjs';
 import { IResponsePagination } from './interfaces/api/IResponsePagination';
 import { IRating } from './interfaces/api/store/IRating.interface';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RatingService {
 
-  protected url: string = "https://devstudios.up.railway.app/api/rating";
+  protected url: string = environment.apiUrl + "/rating";
   protected coments = signal(new Map<number, IRating[]>());
 
   constructor(
