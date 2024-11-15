@@ -10,7 +10,7 @@ import { IScriptDto } from './interfaces/api/store/IScriptDto.interface';
 })
 export class StoreService {
 
-  private url:string = 'http://localhost:3001/api/scripts';
+  private url:string = 'https://devstudios.up.railway.app/api/scripts';
   private scripts = signal<IScriptDto[]>([]);
 
 

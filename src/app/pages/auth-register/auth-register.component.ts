@@ -37,11 +37,11 @@ export class AuthRegisterComponent {
           this.router.navigate(['/home']);
         },
         error: (error) => {
+          console.log(error);
           if( error.error && error.error.err ){
             this.err.set(error.error.err);
             return;
           }
-          console.log(error);
           this.err.set('Unexpected error, please try again later.');
         }
       })

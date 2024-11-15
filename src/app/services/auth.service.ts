@@ -15,7 +15,7 @@ export class AuthService {
 
   private token?: string;
   private email?: string;
-  private url = 'http://localhost:3001/api/auth';
+  private url = 'https://devstudios.up.railway.app/api/auth';
 
   private tokenName = 'token_dvcs';
   private emailname = 'email_dvcs';

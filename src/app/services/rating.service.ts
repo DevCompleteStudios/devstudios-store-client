@@ -10,7 +10,7 @@ import { IRating } from './interfaces/api/store/IRating.interface';
 })
 export class RatingService {
 
-  protected url: string = "http://localhost:3001/api/rating";
+  protected url: string = "https://devstudios.up.railway.app/api/rating";
   protected coments = signal(new Map<number, IRating[]>());
 
   constructor(

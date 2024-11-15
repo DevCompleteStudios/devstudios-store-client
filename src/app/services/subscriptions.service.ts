@@ -9,7 +9,7 @@ import { IResponse } from './interfaces/api/IResponse';
 })
 export class SubscriptionsService {
 
-  private url: string = 'http://localhost:3001/api/subscriptions';
+  private url: string = 'https://devstudios.up.railway.app/api/subscriptions';
   private subscriptions = signal<ISubscriptionDto[] | undefined>(undefined);
 
   constructor(
