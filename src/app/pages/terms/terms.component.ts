@@ -8,4 +8,4 @@ import { MatExpansionModule } from '@angular/material/expansion';
   templateUrl: './terms.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TermsComponent { }
+export class TermsComponent {}
