@@ -8,6 +8,6 @@ export interface ICreateScriptServiceDto {
     price: number;
     image: File;
     methodPayment: methodPayment;
-    youtubeLink: string;
+    youtubeLink?: string;
 }
 
