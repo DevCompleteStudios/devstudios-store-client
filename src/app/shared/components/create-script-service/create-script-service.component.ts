@@ -8,13 +8,14 @@ import { methodPayment } from '../../../services/interfaces/api/store/IScriptPre
 import { ICreateScriptServiceDto } from './interfaces/ICreateScriptService.dto';
 import { merge } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { UploadImagesComponent } from "../upload-images/upload-images.component";
 
 
 
 @Component({
   selector: 'create-script-service',
   standalone: true,
-  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, ReactiveFormsModule],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, ReactiveFormsModule, UploadImagesComponent],
   templateUrl: './create-script-service.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

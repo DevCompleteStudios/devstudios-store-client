@@ -1,0 +1,16 @@
+
+
+<div class="flex justify-center my-4 items-center gap-3">
+    <img
+        (click)="onClick()"
+        class="w-36 h-40 p-2 border border-gray-600 rounded-lg"
+        [src]="previewImage()"
+        alt="preview image"
+    >
+    <input accept="image/*" (change)="onChangeFile($event)" #uploadFile class="hidden" type="file">
+
+    <button (click)="onDeleteImage()" [disabled]="defaultImage == previewImage()" type="button" mat-fab>
+        <mat-icon>delete</mat-icon>
+    </button>
+</div>
+
