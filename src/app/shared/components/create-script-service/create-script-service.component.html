@@ -40,10 +40,21 @@
     </mat-form-field>
 
     <upload-images
+      (onChangeFileFile)="onUploadFile($event)"
     ></upload-images>
+    <mat-error> {{imageErr()}} </mat-error>
+
+    @if (isLoading()) {
+      <div class="flex justify-center">
+        <mat-spinner></mat-spinner>
+      </div>
+    }
 
     <div class="flex justify-center">
-      <button [disabled]="formAddScript.invalid" type="submit" mat-flat-button>Create service</button>
+      <button [disabled]="formAddScript.invalid || isLoading()" type="submit" mat-flat-button>Create service</button>
+    </div>
+    <div class="my-2">
+      <app-show-errors [err]="err()"></app-show-errors>
     </div>
   </form>
 </section>

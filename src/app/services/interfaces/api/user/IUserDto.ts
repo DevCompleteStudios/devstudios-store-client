@@ -6,7 +6,7 @@ import { ISubscriptionPurchaseDto } from "../store/ISubscriptionPurchaseDto";
 export interface IUserDto {
 
   email: string;
-  role: IRoleDto[];
+  roles: IRoleDto[];
   id: number;
   createdAt: Date;
   updatedAt: Date;

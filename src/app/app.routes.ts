@@ -13,6 +13,7 @@ import { PaymentSuccesComponent } from './pages/payment-succes/payment-succes.co
 import { isLoggedGuard } from './guards/auth/is-logged.guard';
 import { isNotLoggedGuard } from './guards/auth/is-not-logged.guard';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { isAdminGuard } from './guards/auth/is-admin.guard';
 
 export const routes: Routes = [
   {
@@ -35,6 +36,7 @@ export const routes: Routes = [
   {
     path: 'dashboard/admin',
     component: DashboardAdminComponent,
+    canActivate: [isAdminGuard]
   },
   {
     path: 'terms',
