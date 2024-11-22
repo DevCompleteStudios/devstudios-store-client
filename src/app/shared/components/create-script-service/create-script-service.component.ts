@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { methodPayment } from '../../../services/interfaces/api/store/IScriptPreviewDto.interface';
+import { ICreateScriptServiceDto } from './interfaces/ICreateScriptService.dto';
 
 
 
@@ -15,13 +16,26 @@ import { methodPayment } from '../../../services/interfaces/api/store/IScriptPre
   templateUrl: './create-script-service.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CreateScriptServiceComponent {
+export class CreateScriptServiceComponent implements OnInit {
+  ngOnInit(): void {
+    if( this.script ){
+      const controls = this.formAddScript.controls;
 
+      controls.description.setValue(this.script.description);
+      controls.methodPayment.setValue(this.script.methodPayment);
+      controls.name.setValue(this.script.name);
+      controls.price.setValue(this.script.price);
+      controls.youtubeLink.setValue(this.script.youtubeLink);
+    }
+  }
+  
+  @Input({required: false})
+  public script?: ICreateScriptServiceDto;
 
   protected formAddScript = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(70)]),
     description: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(250)]),
-    price: new FormControl('', [Validators.required, Validators.min(1), Validators.max(99)]),
+    price: new FormControl(0, [Validators.required, Validators.min(1), Validators.max(99)]),
     methodPayment: new FormControl('', [Validators.required]),
     youtubeLink: new FormControl(''),
   });
@@ -29,5 +43,13 @@ export class CreateScriptServiceComponent {
   protected selectedValue: string = '';
   protected options: methodPayment[] = ['SUBSCRIPTION', 'DEVELOPMENT', 'SUBSCRIPTION_AND_ONE_PAYMENT', 'MAINTENANCE', 'UPDATING'];
 
+
+  protected onSubmit(){
+    if( this.script ){
+      console.log("Actualizando...");
+    } else {
+      console.log("Creando...");
+    }
+  }
 
 }
