@@ -9,6 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { ViewDetailsPurchasesComponent } from "../../shared/components/view-details-purchases/view-details-purchases.component";
 import { IPurchase } from '../../shared/components/view-details-purchases/interfaces/IPurchase';
 import { MatTabsModule } from '@angular/material/tabs';
+import { roles } from '../../services/interfaces/api/roles/IRoleDto';
+import { RouterLink } from '@angular/router';
 
 
 
@@ -22,7 +24,9 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatButtonModule,
     SlicePipe,
     ViewDetailsPurchasesComponent,
-    MatTabsModule
+    MatTabsModule,
+    MatButtonModule,
+    RouterLink
 ],
   templateUrl: './profile.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -80,6 +84,10 @@ export class ProfileComponent implements OnInit {
         dateExpired: s.dateExpired,
       }
     })
+  }
+
+  protected get isAdmin():boolean{
+    return this.user()!.roles.some( r => r.role === roles.ROLE_ADMIN );
   }
 
 }

@@ -11,6 +11,11 @@
       <div>
         <h1 class="text-3xl font-bold">Welcome, {{ user()?.email |slice: 0:1 }}***********</h1>
         <p class="text-gray-400">Member {{ user()?.createdAt | date:'mediumDate' }}</p>
+
+        @if (isAdmin) {
+          <a routerLink="/dashboard/admin" class="my-1" mat-stroked-button>Panel admin</a>
+        }
+
       </div>
       <div class="mt-4 md:mt-0">
         <button mat-icon-button color="primary" aria-label="Editar Perfil">
