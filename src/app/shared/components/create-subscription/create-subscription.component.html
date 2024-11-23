@@ -65,6 +65,13 @@
         <div class="flex justify-center">
             <button type="submit" [disabled]="form.invalid || isLoading() || content().length <= 0" mat-flat-button>Create Subscription</button>
         </div>
+
+        @if (subscription) {
+            <button mat-icon-button class="flex items-center gap-2">
+                delete
+                <mat-icon>delete</mat-icon>
+            </button>
+        }
     </form>
 </div>
 

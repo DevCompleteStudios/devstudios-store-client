@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, Input, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -11,6 +11,7 @@ import { ICreateSubscriptionDto } from './interfaces/ICreateSubscription.dto';
 import { AuthService } from '../../../services/auth.service';
 import { ShowErrorsComponent } from "../show-errors/show-errors.component";
 import { MatIconModule } from '@angular/material/icon';
+import { ISubscriptionDto } from '../../../services/interfaces/api/store/ISubscriptionDto.interface';
 
 @Component({
   selector: 'create-subscription',
@@ -18,7 +19,22 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [ReactiveFormsModule, FormsModule, MatInputModule, MatButtonModule, MatProgressSpinner, MatListModule, ShowErrorsComponent, MatIconModule],
   templateUrl: './create-subscription.component.html'
 })
-export class CreateSubscriptionComponent {
+export class CreateSubscriptionComponent implements OnInit {
+
+  ngOnInit(): void {
+    if( this.subscription ){
+      const controls = this.form.controls;
+
+      controls.price.setValue(this.subscription.price);
+      controls.daysDuration.setValue(this.subscription.daysDuration);
+      controls.name.setValue(this.subscription.name);
+      controls.description.setValue(this.subscription.description);
+      this.content.set(this.subscription.content);
+    }
+  }
+
+  @Input({required: false})
+  public subscription?:ISubscriptionDto;
 
   protected form = new FormGroup({
     price: new FormControl(0, [Validators.required, Validators.min(1), Validators.max(99)]),
@@ -90,6 +106,12 @@ export class CreateSubscriptionComponent {
 
   protected onSubmit(){
     if( this.form.invalid || this.content().length <= 0 ) return;
+
+    if( this.subscription ){
+      console.log('Actualizando...');
+      return;
+    }
+
     const controls = this.form.controls;
     const body:ICreateSubscriptionDto = {
       description: controls.description.value!,
