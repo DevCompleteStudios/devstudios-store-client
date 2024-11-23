@@ -3,28 +3,64 @@
 <div class="max-w-2xl mx-auto px-2 py-3 my-10">
     <h2 class="text-center text-xl font-bold">Create subscription</h2>
 
-    <form class="mt-4">
+    <form (submit)="onSubmit()" [formGroup]="form" class="mt-4">
         <mat-form-field class="w-full">
             <mat-label>Title</mat-label>
-            <input matInput placeholder="Ex. subscription month">
+            <input (blur)="handleErrors()" [formControl]="form.controls.name" matInput placeholder="Ex. subscription month">
+            <mat-error> {{nameErr()}} </mat-error>
         </mat-form-field>
         <mat-form-field class="w-full">
             <mat-label>Description</mat-label>
-            <input matInput placeholder="Ex. acces all content">
+            <input (blur)="handleErrors()" [formControl]="form.controls.description" matInput placeholder="Ex. acces all content">
+            <mat-error> {{descriptionErr()}} </mat-error>
         </mat-form-field>
         <mat-form-field class="w-full" floatLabel="always">
             <mat-label>Price</mat-label>
-            <input min="1" max="99" matInput type="number" class="example-right-align" placeholder="0" />
+            <input (blur)="handleErrors()" [formControl]="form.controls.price" min="1" max="99" matInput type="number" class="example-right-align" placeholder="0" />
             <span matTextPrefix>$&nbsp;</span>
             <span matTextSuffix>.00</span>
+            <mat-error> {{priceErr()}} </mat-error>
         </mat-form-field>
         <mat-form-field class="w-full">
             <mat-label>Days duration</mat-label>
-            <input type="number" matInput>
+            <input (blur)="handleErrors()" [formControl]="form.controls.daysDuration" type="number" matInput>
+            <mat-error> {{daysErr()}} </mat-error>
         </mat-form-field>
 
+        <div>
+            <mat-form-field class="w-full">
+                <mat-label>Add benefit</mat-label>
+                <input [formControl]="currentBenefit" matInput placeholder="Ex. support 24/7">
+            </mat-form-field>
+            <app-show-errors err="add the list of benefits"/>
+
+            <div class="flex justify-center mt-4 mb-2">
+                <button [disabled]="currentBenefit.errors" type="button" mat-flat-button (click)="addBenefit()">Add benefit</button>
+            </div>
+        </div>
+
+        <mat-list role="list">
+            @if (content().length > 0) {
+                @for (item of content(); track $index) {
+                    <mat-list-item>
+                        {{ item }}
+                        <button type="button" mat-icon-button aria-label="Delete" (click)="removeBenefit(item)">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                    </mat-list-item>
+                }
+            }
+        </mat-list>
+          
+
+        @if (isLoading()) {
+            <div class="flex justify-center my-2">
+                <mat-spinner></mat-spinner>
+            </div>
+        }
+
         <div class="flex justify-center">
-            <button mat-flat-button>Create Subscription</button>
+            <button type="submit" [disabled]="form.invalid || isLoading() || content().length <= 0" mat-flat-button>Create Subscription</button>
         </div>
     </form>
 </div>

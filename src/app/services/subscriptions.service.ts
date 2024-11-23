@@ -4,6 +4,7 @@ import { ISubscriptionDto } from './interfaces/api/store/ISubscriptionDto.interf
 import { Observable, tap } from 'rxjs';
 import { IResponse } from './interfaces/api/IResponse';
 import { environment } from '../../environments/environment';
+import { ICreateSubscriptionDto } from '../shared/components/create-subscription/interfaces/ICreateSubscription.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,17 @@ export class SubscriptionsService {
       'Authorization': `Bearer ${token}`,
     });
     return this.http.get<IResponse<string>>(`${this.url}/buy/${id}`, {headers});
+  }
+
+
+  public addSubscription( body: ICreateSubscriptionDto, token: string ){
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token
+    });
+    return this.http.post<IResponse<ISubscriptionDto>>(this.url + '/create', body, {headers})
+      .pipe(
+        tap( dat => this.subscriptions.set([...this.subscriptions() ?? [], dat.data]) ),
+      )
   }
 
 }
