@@ -109,7 +109,6 @@ export class CreateSubscriptionComponent {
           if( err.error && err.error.error ){
             this.err.set(err.error.error);
           } else {
-            console.log(err);
             this.err.set('Unexpected error, please try again later');
           }
         }

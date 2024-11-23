@@ -42,9 +42,6 @@ export class UploadImagesComponent implements OnInit{
     }
     const file = files[0];
     this.onDecodeFile(file);
-
-
-    console.log(e);
   }
 
 
@@ -57,7 +54,6 @@ export class UploadImagesComponent implements OnInit{
   protected onDecodeFile( file:File ){
     const reader = new FileReader();
     reader.onload = () => {
-      console.log("cambiado");
       const value = reader.result as string;
       this.events(value, file);
     };

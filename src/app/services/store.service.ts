@@ -31,7 +31,6 @@ export class StoreService {
   }
 
   public findById(id: number):Observable<IResponse<IScriptDto>>{
-    console.log(id);
     return this.http.get<IResponse<IScriptDto>>(`${this.url}/find-by-id/${id}`)
       .pipe(
         tap( data => this.scripts.set([...this.scripts(), data.data]) ),

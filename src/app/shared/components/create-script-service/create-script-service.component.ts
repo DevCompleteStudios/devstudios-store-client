@@ -147,7 +147,6 @@ export class CreateScriptServiceComponent implements OnInit {
             if( err.error && err.error.err ){
               this.err.set(err.error.err);
             } else {
-              console.log(err);
               this.err.set('Unexpected error, please contact support');
             }
           }

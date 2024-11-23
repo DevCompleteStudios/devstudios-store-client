@@ -32,11 +32,14 @@
                 <mat-label>Add benefit</mat-label>
                 <input [formControl]="currentBenefit" matInput placeholder="Ex. support 24/7">
             </mat-form-field>
-            <app-show-errors err="add the list of benefits"/>
+            @if (content().length <= 0) {
+                <app-show-errors err="add the list of benefits"/>
+            }
 
             <div class="flex justify-center mt-4 mb-2">
                 <button [disabled]="currentBenefit.errors" type="button" mat-flat-button (click)="addBenefit()">Add benefit</button>
             </div>
+            <app-show-errors [err]="err()"></app-show-errors>
         </div>
 
         <mat-list role="list">

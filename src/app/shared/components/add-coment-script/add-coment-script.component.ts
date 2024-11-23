@@ -63,7 +63,6 @@ export class AddComentScriptComponent {
           if( error.error && error.error.err ){
             this.err.set(error.error.err);
           }else {
-            console.log(error);
             this.err.set("Unexpected error, please try again later");
           }
         }

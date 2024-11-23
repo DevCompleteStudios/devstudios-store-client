@@ -46,9 +46,7 @@ export class ProfileComponent implements OnInit {
       .pipe(finalize(() => this.isLoading.set(false)))
       .subscribe({
         next: (data) => this.user.set(data.data),
-        error: (error) => {
-          console.log(error);
-        },
+        error: (error) => {},
       });
   }
 

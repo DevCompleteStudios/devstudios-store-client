@@ -53,7 +53,6 @@ export class ShowRatingComponent implements OnInit {
           next: (data) => this.rating.set(data.data),
           error: (error) => {
             this.err.set('Unexpected error, please try again later');
-            console.log(error);
           }
         })
     }
