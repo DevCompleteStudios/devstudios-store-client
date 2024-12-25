@@ -27,6 +27,10 @@ export class NavbarComponent {
       link: 'subscriptions',
       name: 'Subscriptions'
     },
+    {
+      link: 'contact',
+      name: 'Contact me'
+    },
   ];
 
 

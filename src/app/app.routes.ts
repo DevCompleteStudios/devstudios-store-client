@@ -13,6 +13,7 @@ import { PaymentSuccesComponent } from './pages/payment-succes/payment-succes.co
 import { isLoggedGuard } from './guards/auth/is-logged.guard';
 import { isNotLoggedGuard } from './guards/auth/is-not-logged.guard';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { ContactComponent } from './pages/contact/contact.component';
 
 export const routes: Routes = [
   {
@@ -62,6 +63,10 @@ export const routes: Routes = [
     path: 'auth/forgot-password',
     component: ForgotPasswordComponent,
     canActivate: [isNotLoggedGuard]
+  },
+  {
+    path: 'contact',
+    component: ContactComponent
   },
   {
     path: '**',
