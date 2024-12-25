@@ -59,7 +59,6 @@ export class BuyScriptBtnComponent {
         next: (data) => window.location.href = data.data,
         error: (error) => {
           if( error.error && error.error.status && error.error.status === 401 ){
-            console.log('token caducado');
           } else {
             this.err.set('Unexpected error, please try again later');
           }
@@ -78,7 +77,6 @@ export class BuyScriptBtnComponent {
         next: (data) => window.location.href = data.data,
         error: (error) => {
           if( error.error && error.error.status && error.error.status === 401 ){
-            console.log('token caducado');
           } else {
             this.err.set('Unexpected error, please try again later');
           }

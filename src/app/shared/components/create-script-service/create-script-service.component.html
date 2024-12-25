@@ -1,40 +1,60 @@
-<section class="w-full px-8 py-6 bg-gray-600 mt-20 max-w-3xl rounded-lg mx-auto">
+<section class="my-10 max-w-2xl mx-auto">
   <h3 class="text-xl text-center">Add new Script</h3>
 
-  <form class="mt-6">
-
+  <form (submit)="onSubmit()" [formGroup]="formAddScript" class="mt-6">
     <mat-form-field class="w-full">
       <mat-label>Script Name</mat-label>
-      <input matInput placeholder="Ex. The best script">
+      <input (blur)="handleErrors()" [formControl]="formAddScript.controls.name" matInput placeholder="Ex. The best script">
+      <mat-error> {{nameErr()}} </mat-error>
     </mat-form-field>
 
     <mat-form-field class="w-full">
       <mat-label>Script description</mat-label>
-      <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+      <textarea (blur)="handleErrors()" [formControl]="formAddScript.controls.description" matInput placeholder="Ex. It makes me feel..."></textarea>
+      <mat-error> {{descriptionErr()}} </mat-error>
     </mat-form-field>
 
     <mat-form-field floatLabel="always" class="w-full">
-      <mat-label>Amount</mat-label>
-      <input matInput type="number" class="example-right-align" placeholder="0" />
+      <mat-label>Price</mat-label>
+      <input (blur)="handleErrors()" [formControl]="formAddScript.controls.price" matInput type="number" class="example-right-align" placeholder="0" />
       <span matTextPrefix>$&nbsp;</span>
       <span matTextSuffix>.00</span>
+      <mat-error> {{priceErr()}} </mat-error>
     </mat-form-field>
 
     <mat-form-field class="w-full">
       <mat-label>Script Status</mat-label>
-      <mat-select [(ngModel)]="selectedValue" name="methodPayment">
+      <mat-select (valueChange)="handleErrors()" [formControl]="formAddScript.controls.methodPayment" name="methodPayment">
         <option value="" selected></option>
         @for (opt of options; track $index) {
           <mat-option [value]="opt"> {{opt}} </mat-option>
         }
       </mat-select>
+      <mat-error> {{methodPaymentErr()}} </mat-error>
     </mat-form-field>
 
     <mat-form-field class="w-full">
       <mat-label>Youtube Link</mat-label>
-      <input matInput placeholder="Ex. https://your-link-video">
+      <input (blur)="handleErrors()" [formControl]="formAddScript.controls.youtubeLink" matInput placeholder="Ex. https://your-link-video">
+      <mat-error> {{youtubelinkErr()}} </mat-error>
     </mat-form-field>
 
-    <button class="w-full" mat-stroked-button>Save</button>
+    <upload-images
+      (onChangeFileFile)="onUploadFile($event)"
+    ></upload-images>
+    <mat-error> {{imageErr()}} </mat-error>
+
+    @if (isLoading()) {
+      <div class="flex justify-center">
+        <mat-spinner></mat-spinner>
+      </div>
+    }
+
+    <div class="flex justify-center">
+      <button [disabled]="formAddScript.invalid || isLoading()" type="submit" mat-flat-button>Create service</button>
+    </div>
+    <div class="my-2">
+      <app-show-errors [err]="err()"></app-show-errors>
+    </div>
   </form>
 </section>

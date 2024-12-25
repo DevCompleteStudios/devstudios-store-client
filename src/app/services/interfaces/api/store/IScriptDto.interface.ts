@@ -9,6 +9,7 @@ export interface IScriptDto extends IScriptPreviewDto {
   ratings: IRatingPreview[];
   purchases: any[];
   youtubeLink: string;
+  scriptText: string;
 
 }
 

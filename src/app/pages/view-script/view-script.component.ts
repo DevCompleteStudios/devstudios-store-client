@@ -10,11 +10,23 @@ import { BuyScriptBtnComponent } from "../../shared/components/buy-script-btn/bu
 import { CurrencyPipe } from '@angular/common';
 import { AddComentScriptComponent } from "../../shared/components/add-coment-script/add-coment-script.component";
 import { ShowRatingComponent } from "../../shared/components/show-rating/show-rating.component";
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-view-script',
   standalone: true,
-  imports: [MatProgressSpinnerModule, ShowErrorsComponent, MatIconModule, BuyScriptBtnComponent, CurrencyPipe, MatIconModule, AddComentScriptComponent, MatIconModule, ShowRatingComponent],
+  imports: [
+    MatProgressSpinnerModule,
+    ShowErrorsComponent,
+    MatIconModule,
+    BuyScriptBtnComponent,
+    CurrencyPipe,
+    MatIconModule,
+    AddComentScriptComponent,
+    MatIconModule,
+    ShowRatingComponent,
+    MatButtonModule
+  ],
   templateUrl: './view-script.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -85,6 +97,14 @@ export class ViewScriptComponent implements OnInit {
       (this.script()!.methodPayment === 'SUBSCRIPTION_AND_ONE_PAYMENT'
           ||
         this.script()!.methodPayment === 'ONE_PAYMENT');
+  }
+
+  copyScriptToClipboard(){
+    const url = `loadstring(game:HttpGet("${this.script()!.scriptText}"))()`;
+    navigator.clipboard.writeText(url)
+      .then(
+        () => alert("Already copy!")
+      )
   }
 
 }

@@ -54,10 +54,8 @@ export class ResetPasswordComponent {
 
   onSubmit(): void {
     if( this.form.invalid ) {
-      console.log("no paso");
       return;
     };
-    console.log("Si se pudo");
     this.isLoading.set(true);
     const code: string = this.form.controls.code.value!;
     const password: string = this.form.controls.password.value!;
@@ -67,7 +65,7 @@ export class ResetPasswordComponent {
         finalize( () => this.isLoading.set(false) )
       )
       .subscribe({
-        next: (data) => {console.log(data)},
+        next: (data) => {},
         error: (error) => {
           if( error.error && error.error.err ){
             this.err.set(error.error.err);

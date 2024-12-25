@@ -5,6 +5,7 @@ import { IScriptPreviewDto } from './interfaces/api/store/IScriptPreviewDto.inte
 import { IResponse } from './interfaces/api/IResponse';
 import { IScriptDto } from './interfaces/api/store/IScriptDto.interface';
 import { environment } from '../../environments/environment';
+import { ICreateScriptServiceDto } from '../shared/components/create-script-service/interfaces/ICreateScriptService.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,6 @@ export class StoreService {
   }
 
   public findById(id: number):Observable<IResponse<IScriptDto>>{
-    console.log(id);
     return this.http.get<IResponse<IScriptDto>>(`${this.url}/find-by-id/${id}`)
       .pipe(
         tap( data => this.scripts.set([...this.scripts(), data.data]) ),
@@ -42,6 +42,27 @@ export class StoreService {
       'Authorization': `Bearer ${token}`
     });
     return this.http.get<IResponse<string>>(`${this.url}/buy-script/${id}`, {headers});
+  }
+
+  public addNewScriptService(body: ICreateScriptServiceDto, token: string):Observable<IResponse<IScriptDto>>{
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token.trim()
+    });
+    return this.http.post<IResponse<IScriptDto>>(this.url + '/create-script', this.toFormData(body), {headers})
+      .pipe(
+        tap( data => this.scripts.set([...this.scripts(), data.data]) ),
+      );
+  }
+
+
+  private toFormData(body: {[key:string]: any}):FormData{
+    const form = new FormData();
+  
+    for( const [key, value] of Object.entries(body) ){
+      form.append(key, value);
+    }
+
+    return form;
   }
 
 }
